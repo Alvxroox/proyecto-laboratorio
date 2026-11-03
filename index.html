@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e92335">
+  <title>¡Qué Rico! | Pedí algo rico</title>
+  <link rel="stylesheet" href="estilos.css">
+  <script src="datos.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Qué Rico, inicio">
+      <span class="brand-mark">¡</span><span>qué<span class="brand-accent">rico</span></span>
+    </a>
+    <div class="delivery-location">
+      <span class="pin">⌖</span>
+      <div><small>Entregar en</small><strong>Tu dirección <span>⌄</span></strong></div>
+    </div>
+    <button class="cart-top" id="ir-carrito" type="button" aria-label="Ir al carrito">
+      <span>🛒</span><span class="cart-top-label">Mi pedido</span><b id="contador-superior">0</b>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">TU ANTOJO, A UN CLIC</span>
+        <h1>Hoy pinta algo<br><span>rico.</span></h1>
+        <p>Encontrá tus favoritos y disfrutá sin moverte de casa.</p>
+        <a class="hero-button" href="#catalogo">Ver opciones <span>→</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-circle"></div>
+        <div class="hero-spark spark-one">✦</div><div class="hero-spark spark-two">✦</div>
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=850&q=85" alt="">
+        <span class="hero-sticker">¡Qué<br>rico!</span>
+      </div>
+    </section>
+
+    <section class="benefits" aria-label="Beneficios">
+      <div><span class="benefit-icon">⚡</span><span><strong>Rápido y fácil</strong><small>Pedí en segundos</small></span></div>
+      <div><span class="benefit-icon">♡</span><span><strong>Tus favoritos</strong><small>Guardá lo que te gusta</small></span></div>
+      <div><span class="benefit-icon">🍟</span><span><strong>Para cada antojo</strong><small>Elegí algo rico hoy</small></span></div>
+    </section>
+
+    <section class="catalog-section" id="catalogo">
+      <div class="section-heading">
+        <div><span class="eyebrow red">ELEGÍ TU COMIDA</span><h2>¿Qué tenés ganas de comer?</h2></div>
+        <div class="search-wrap"><span>⌕</span><input id="buscador" type="search" placeholder="Buscar comida..." aria-label="Buscar comida"></div>
+      </div>
+      <nav class="category-list" id="categorias" aria-label="Categorías">
+        <button class="category active" data-categoria="Todos" type="button">🍽️ Todo</button>
+        <button class="category" data-categoria="Hamburguesas" type="button">🍔 Hamburguesas</button>
+        <button class="category" data-categoria="Pizzas" type="button">🍕 Pizzas</button>
+        <button class="category" data-categoria="Empanadas" type="button">🥟 Empanadas</button>
+        <button class="category" data-categoria="Bebidas" type="button">🥤 Bebidas</button>
+        <button class="category" data-categoria="Postres" type="button">🍰 Postres</button>
+      </nav>
+      <div class="catalog-layout">
+        <div class="products-area">
+          <div class="results-line"><span id="texto-resultados">Nuestros más elegidos</span><span class="tiny-note">Precios en pesos argentinos</span></div>
+          <div class="product-grid" id="contenedor-productos"></div>
+          <div class="empty-state hidden" id="sin-resultados">No encontramos productos con esa búsqueda. Probá con otra palabra 😊</div>
+        </div>
+        <aside class="cart-panel" id="panel-carrito">
+          <div class="cart-heading"><div><span class="eyebrow red">TU SELECCIÓN</span><h3>Tu pedido <span id="contador-panel" class="count-pill">0</span></h3></div><span class="cart-emoji">🛍️</span></div>
+          <div id="items-carrito" class="cart-items">
+            <div class="cart-empty"><div>🛒</div><strong>Tu carrito está esperando</strong><p>Agregá algo rico y aparecerá acá.</p></div>
+          </div>
+          <div class="cart-summary">
+            <div class="summary-row"><span>Subtotal</span><strong id="subtotal">$0</strong></div>
+            <div class="summary-row"><span>Envío estimado</span><strong class="free-shipping">Gratis</strong></div>
+            <div class="summary-total"><span>Total</span><strong id="total">$0</strong></div>
+            <button class="checkout-button" id="abrir-checkout" type="button" disabled>Continuar pedido <span>→</span></button>
+            <p class="secure-note">♡ Tu pedido, simple y seguro</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="favorites-section" id="favoritos-seccion">
+      <div class="section-heading"><div><span class="eyebrow red">GUARDADOS CON AMOR</span><h2>Mis favoritos <span class="heart-heading">♥</span></h2></div></div>
+      <div id="contenedor-favoritos" class="favorites-grid"></div>
+      <p id="sin-favoritos" class="favorite-hint">Tocá el corazón de un producto para guardarlo acá.</p>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">¡</span><span>qué<span class="brand-accent">rico</span></span></a><p>Proyecto académico</p><span>© 2026 ¡Qué Rico!</span></footer>
+
+  <div class="toast" id="notificacion" role="status" aria-live="polite"></div>
+
+  <div class="modal-backdrop hidden" id="modal-checkout" role="dialog" aria-modal="true" aria-labelledby="checkout-titulo">
+    <form class="checkout-modal" id="formulario-pedido">
+      <button class="modal-close" id="cerrar-checkout" type="button" aria-label="Cerrar">×</button>
+      <span class="eyebrow red">UN ÚLTIMO PASO</span><h2 id="checkout-titulo">¿A dónde lo llevamos?</h2>
+      <p>Completá tus datos para preparar el resumen del pedido.</p>
+      <label for="nombre-cliente">Tu nombre</label><input id="nombre-cliente" name="nombre" required minlength="2" placeholder="Ej. Martin Pérez">
+      <label for="direccion-cliente">Dirección de entrega</label><input id="direccion-cliente" name="direccion" required placeholder="Calle y número">
+      <label for="telefono-cliente">Teléfono</label><input id="telefono-cliente" name="telefono" required type="tel" placeholder="Ej. 381 555 1234">
+      <div class="checkout-total"><span>Total del pedido</span><strong id="total-modal">$0</strong></div>
+      <button class="checkout-button" type="submit">Confirmar pedido <span>✓</span></button>
+      <small class="form-disclaimer">Demostración académica: no se realiza ningún pago real.</small>
+    </form>
+  </div>
+</body>
+</html>
